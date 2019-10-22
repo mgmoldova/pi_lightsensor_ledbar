@@ -21,10 +21,11 @@ if __name__ == '__main__':
 
             resistance = (float)(1023 - sensor_value) * 10 / sensor_value
 
-            for i in range(threshold):
-                grovepi.ledBar_setLevel(ledbar, i)
+            if resistance < threshold:
+                grovepi.ledBar_setLevel(ledbar, int(resistance))
                 time.sleep(0.2)
-            time.sleep(.3)
+            else:
+                grovepi.ledBar_setLevel(ledbar, 10)
             
             print(f'Valoarea sensorului: {sensor_value}\nRezistenta: {resistance}')
             time.sleep(1)
